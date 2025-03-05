@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>重庆荃研科技有限公司</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* 全局样式 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; 
+            font-family: Arial, sans-serif;
+            height: 100vh;
+        }
+
+        /* loading-logo */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: fixed;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999; 
+        }
+        .loading-container img {
+            width: 100px;
+            height: auto;
+            top: 38%;
+        }
+        /* loading-text */
+        .loading-text {
+            font-size: 1.5em;
+            color: transparent; /* 文字颜色透明 */
+            margin-top: 20px;
+            font-weight: bold;
+            background: linear-gradient(
+                90deg,
+                rgba(13, 173, 237, 0.872) 0%, /* 透明度较低的部分 */
+                rgb(51, 115, 244) 50%, /* 透明度较高的部分 */
+                rgba(4, 125, 224, 0.831) 100% /* 透明度较低的部分 */
+            );
+            background-size: 200% 100%; /* 背景宽度为 200% */
+            -webkit-background-clip: text; /* 背景裁剪到文字 */
+            background-clip: text;
+            animation: ripple 2.5s linear infinite; /* 水波纹动画 */
+        }
+
+        /* 定义水波纹动画 */
+        @keyframes ripple {
+            0% {
+                background-position: -100% 0; /* 初始位置 */
+            }
+            100% {
+                background-position: 100% 0; /* 结束位置 */
+            }
+        }
+        .content {
+            display: none;
+        }
+
+        /* navigator */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .navbar2{
+            position: absolute;
+            top: 7%;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: rgb(8,100,180);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0; /* 初始状态为透明 */
+            transition: opacity 1s ease-in-out; /* 渐变效果 */
+        }
+        .navbar3{
+            position: absolute;
+            top: 5%;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: rgb(8,100,180);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0; /* 初始状态为透明 */
+            transition: opacity 1s ease-in-out; /* 渐变效果 */
+        }
+        .navbar4{
+            position: absolute;
+            top: 5%;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: rgb(8,100,180);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0; /* 初始状态为透明 */
+            transition: opacity 1s ease-in-out; /* 渐变效果 */
+        }
+        .navbar5{
+            position: absolute;
+            top: 5%;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: rgb(8,100,180);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0; /* 初始状态为透明 */
+            transition: opacity 1s ease-in-out; /* 渐变效果 */
+        }
+        .navbar6{
+            position: absolute;
+            top: 5%;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: rgb(8,100,180);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0; /* 初始状态为透明 */
+            transition: opacity 1s ease-in-out; /* 渐变效果 */
+        }
+        .navbar2.visible {
+            opacity: 1; /* 最终状态为不透明 */
+        }
+        .navbar3.visible {
+            opacity: 1; /* 最终状态为不透明 */
+        }
+        .navbar4.visible {
+            opacity: 1; /* 最终状态为不透明 */
+        }
+        .navbar5.visible {
+            opacity: 1; /* 最终状态为不透明 */
+        }
+        .navbar6.visible {
+            opacity: 1; /* 最终状态为不透明 */
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-container img {
+            left: 20%;
+            width: 40px;
+            height: auto;
+        }
+
+        .company-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .company-name {
+            font-size: 0.5em;
+            font-weight: bold;
+            font-family: "华文彩云";
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: flowColor 5s linear infinite;
+        }
+
+        .company-url {
+            font-size: 0.4em;
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: flowColor 5s linear infinite;
+        }
+
+        @keyframes flowColor {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* 下箭头 */
+        .arrow-down {
+            position: fixed; 
+            bottom: 16px; 
+            left: 48%;
+            transform: translateX(-50%);
+            font-size: 3.2em; 
+            color: rgb(18,107,174); 
+            animation: float 1.5s ease-in-out infinite; 
+            z-index: 1000; 
+        }
+        @keyframes float {
+            0% {
+                transform: translate(-50%, 0);
+            }
+            50% {
+                transform: translate(-50%, 10px);
+            }
+            100% {
+                transform: translate(-50%, 0);
+            }
+        }
+
+        /* 容器 */
+        .scroll-container {
+            height: 100vh;
+            overflow-y: scroll; 
+            scroll-snap-type: y mandatory; 
+            scroll-behavior: smooth; 
+        }
+
+        /* 页面样式 */
+        section {
+            height: 100vh;
+            scroll-snap-align: start; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            font-size: 2em;
+            color: white;
+        }
+
+        #page1, #page2, #page3, #page4, #page5, #page6{
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 竖向文字容器 */
+        .vertical-text-container {
+            position: absolute;
+            top: 40%;
+            left: 20px; 
+            transform: translateY(-50%);
+            z-index: 2; 
+        }
+        /* 竖向文字样式 */
+        .vertical-text {
+            position: absolute;
+            top: 40%;
+            left: 8px;
+            transform: translateY(-50%);
+            z-index: 2; 
+            writing-mode: vertical-rl; 
+            text-orientation: upright;
+            font-family: Arial, sans-serif;
+            font-size: 1em;
+            color: rgb(23,129,181); 
+            line-height: 1.8; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+            font-family: cursive;
+            font-weight: 900;
+        }
+        .vertical-text1 {
+            position: absolute;
+            top: 46%;
+            left: 13px; 
+            transform: translateY(-50%);
+            z-index: 2; 
+            writing-mode: vertical-rl; 
+            text-orientation: upright;
+            font-family: Arial, sans-serif;
+            font-size: 1em;
+            color: rgb(23,129,181); 
+            line-height: 1.8; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+            font-family: cursive;
+            font-weight: 900;
+        }
+        /* 段落间距 */
+        .vertical-text p {
+            margin: 0;
+            padding: 70px 0; 
+        }
+        .text-wrapper {
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+        .text-wrapper.hidden {
+            opacity: 0;
+        }
+
+        /* Allimage */
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .visible {
+            opacity: 1;
+        }
+        @keyframes flyInFromLeft {
+            0% {
+                transform: translateX(-100vw);
+                opacity: 0;
+            }
+            60% {
+                transform: translateX(30vw);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        #page2 .product-text {
+            font-size: 3em;
+            color: #fff;
+            font-weight: bold;
+            opacity: 0;
+            animation: flyInFromLeft 1.5s ease-out forwards;
+        }
+        .background-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 加载状态容器 -->
+    <div class="loading-container">
+        <img src="https://i.imgs.ovh/2025/03/04/C0LXY.png" alt="C0LXY.png" border="0" id="loadinglogo">
+        <div class="loading-text">荃研科技</div>
+    </div>
+
+    <!-- 主内容容器 -->
+    <div class="content">
+        
+        <!-- 滚动容器 -->
+        <div class="scroll-container">
+            <div class="arrow-down"><i class="fas fa-chevron-down"></i></div>
+            <!-- 页面1 -->
+            <section id="page1">
+                <img src="https://i.imgs.ovh/2025/03/04/7i6v9.png" alt="7i6v9.png" border="0" id="img1" />
+                <img src="https://i.imgs.ovh/2025/03/04/7i2Bb.png" alt="7i2Bb.png" border="0" id="img2" />
+                <div class="vertical-text">
+                    <div class="text-wrapper">
+                        <p>专注行业领域</p>
+                    </div>
+                </div>
+                <div class="vertical-text1">
+                    <div class="text-wrapper">
+                        <p>与您共创价值 </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 页面2 -->
+            <section id="page2">
+                <div class="navbar2">
+                    <div class="logo-container">
+                        <img src="https://i.imgs.ovh/2025/03/04/C0LXY.png" alt="C0LXY.png" border="0" id="logoimg">
+                        <div class="company-info">
+                            <span class="company-name">重庆荃研科技有限公司</span>
+                            <span class="company-url">www.cqqydd.com</span>
+                        </div>
+                    </div>
+                </div>
+                <img src="https://i.imgs.ovh/2025/03/05/C7E3h.png" alt="C7E3h.png" border="0" id="img3">
+                <img src="https://i.imgs.ovh/2025/03/05/C7lUe.png" alt="C7lUe.png" border="0" id="img4">
+            </section>
+
+            <!-- 页面3 -->
+            <section id="page3">
+                <div class="navbar3">
+                    <div class="logo-container">
+                        <img src="https://i.imgs.ovh/2025/03/04/C0LXY.png" alt="C0LXY.png" border="0" id="logoimg">
+                        <div class="company-info">
+                            <span class="company-name">重庆荃研科技有限公司</span>
+                            <span class="company-url">www.cqqydd.com</span>
+                        </div>
+                    </div>
+                </div>
+                <img src="https://i.imgs.ovh/2025/03/05/CCbkx.png" alt="CCbkx.png" border="0" id="img5">
+                <img src="https://i.imgs.ovh/2025/03/05/CCz4M.png" alt="CCz4M.png" border="0" id="img6">
+            </section>
+
+            <!-- 页面5 -->
+            <section id="page5">
+                <div class="navbar5">
+                    <div class="logo-container">
+                        <img src="https://i.imgs.ovh/2025/03/04/C0LXY.png" alt="C0LXY.png" border="0" id="logoimg">
+                        <div class="company-info">
+                            <span class="company-name">重庆荃研科技有限公司</span>
+                            <span class="company-url">www.cqqydd.com</span>
+                        </div>
+                    </div>
+                </div>
+                <img src="https://i.imgs.ovh/2025/03/05/CCgVh.png" alt="CCgVh.png" border="0" id="img9">
+                <img src="https://i.imgs.ovh/2025/03/05/CCkne.png" alt="CCkne.png" border="0" id="img10">
+            </section>
+
+            <!-- 页面6 -->
+            <section id="page6">
+                <div class="navbar6">
+                    <div class="logo-container">
+                        <img src="https://i.imgs.ovh/2025/03/04/C0LXY.png" alt="C0LXY.png" border="0" id="logoimg">
+                        <div class="company-info">
+                            <span class="company-name">重庆荃研科技有限公司</span>
+                            <span class="company-url">www.cqqydd.com</span>
+                        </div>
+                    </div>
+                </div>
+                <img src="https://i.imgs.ovh/2025/03/05/CC6vt.png" alt="CC6vt.png" border="0" id="img11">
+                <img src="https://i.imgs.ovh/2025/03/05/CC89q.png" alt="CC89q.png" border="0" id="img12">
+            </section>
+
+            <!-- 页面4 -->
+            <section id="page4">
+                <div class="navbar4">
+                    <div class="logo-container">
+                        <img src="https://i.imgs.ovh/2025/03/04/C0LXY.png" alt="C0LXY.png" border="0" id="logoimg">
+                        <div class="company-info">
+                            <span class="company-name">重庆荃研科技有限公司</span>
+                            <span class="company-url">www.cqqydd.com</span>
+                        </div>
+                    </div>
+                </div>
+                <img src="https://i.imgs.ovh/2025/03/04/C0fdO.png" alt="C0fdO.png" border="0" id="img7" />
+                <img src="https://i.imgs.ovh/2025/03/04/C0v0d.png" alt="C0v0d.png" border="0" id="img8" />
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // loading page
+        const loadinglogo = document.getElementById('loadinglogo');
+        loadinglogo.classList.add('visible');
+        window.addEventListener('load', function() {
+            loadinglogo.classList.remove('visible');
+            document.querySelector('.loading-container').style.display = 'none';
+            document.querySelector('.content').style.display = 'block';
+        });
+
+        let currentImage = 1;
+        const navbar2 = document.querySelector('.navbar2');
+        const navbar3 = document.querySelector('.navbar3');
+        const navbar4 = document.querySelector('.navbar4');
+        const navbar5 = document.querySelector('.navbar5');
+        const navbar6 = document.querySelector('.navbar6');
+        const img1 = document.getElementById('img1');
+        const img2 = document.getElementById('img2');
+        const logoimg = document.getElementById('logoimg');
+        const verticalTextWrapper = document.querySelector('.vertical-text .text-wrapper');
+        const verticalText1Wrapper = document.querySelector('.vertical-text1 .text-wrapper');
+        const img3 = document.getElementById('img3');
+        const img4 = document.getElementById('img4');
+        logoimg.classList.add('visible');
+
+        // 页面1的图片切换功能
+        function switchImages() {
+            if (currentImage === 1) {
+                img1.classList.remove('visible');
+                img2.classList.add('visible');
+                currentImage = 2;
+
+                verticalTextWrapper.classList.add('hidden');
+                verticalText1Wrapper.classList.add('hidden');
+                // 延迟后更新文字
+                setTimeout(() => {
+                    verticalTextWrapper.querySelector('p').textContent = '以专业赋能';
+                    verticalTextWrapper.querySelector('p').style.color = 'white';
+                    verticalText1Wrapper.querySelector('p').textContent = '以诚信致远';
+                    verticalText1Wrapper.querySelector('p').style.color = 'white';
+                    verticalTextWrapper.classList.remove('hidden');
+                    verticalText1Wrapper.classList.remove('hidden');
+                }, 1000);
+            } else {
+                img2.classList.remove('visible');
+                img1.classList.add('visible');
+                currentImage = 1;
+                verticalTextWrapper.classList.add('hidden');
+                verticalText1Wrapper.classList.add('hidden');
+                // 延迟后恢复文字
+                setTimeout(() => {
+                    verticalTextWrapper.querySelector('p').textContent = '专注行业领域';
+                    verticalTextWrapper.querySelector('p').style.color = 'rgb(23,129,181)';
+                    verticalText1Wrapper.querySelector('p').textContent = '与您共创价值';
+                    verticalText1Wrapper.querySelector('p').style.color = 'rgb(23,129,181)';
+                    verticalTextWrapper.classList.remove('hidden');
+                    verticalText1Wrapper.classList.remove('hidden');
+                }, 1000);
+            }
+        }
+        let imageInterval = setInterval(switchImages, 4500);
+
+        // 初始显示第一个图片
+        img1.classList.add('visible');
+
+        // 页面2的图片切换功能
+        let currentPage2Image = 3;
+        function switchPage2Images() {
+            if (currentPage2Image === 3) {
+                img3.classList.remove('visible');
+                img4.classList.add('visible');
+                currentPage2Image = 4;
+            } else {
+                img4.classList.remove('visible');
+                img3.classList.add('visible');
+                currentPage2Image = 3;
+            }
+        }
+        let page2ImageInterval;
+
+        // 页面4的图片切换功能
+        let currentPage4Image = 7;
+        const img7 = document.getElementById('img7');
+        const img8 = document.getElementById('img8');
+
+        function switchPage4Images() {
+            if (currentPage4Image === 7) {
+                img7.classList.remove('visible');
+                img8.classList.add('visible');
+                currentPage4Image = 8;
+            } else {
+                img8.classList.remove('visible');
+                img7.classList.add('visible');
+                currentPage4Image = 7;
+            }
+        }
+        let page4ImageInterval;
+
+        // 页面3的图片切换功能
+        let currentPage3Image = 5;
+        const img5 = document.getElementById('img5');
+        const img6 = document.getElementById('img6');
+
+        function switchPage3Images() {
+            if (currentPage3Image === 5) {
+                img5.classList.remove('visible');
+                img6.classList.add('visible');
+                currentPage3Image = 6;
+            } else {
+                img6.classList.remove('visible');
+                img5.classList.add('visible');
+                currentPage3Image = 5;
+            }
+        }
+        let page3ImageInterval;
+
+        // 页面5的图片切换功能
+        let currentPage5Image = 9;
+        const img9 = document.getElementById('img9');
+        const img10 = document.getElementById('img10');
+        function switchPage5Images() {
+            if (currentPage5Image === 9) {
+                img9.classList.remove('visible');
+                img10.classList.add('visible');
+                currentPage5Image = 10;
+            } else {
+                img10.classList.remove('visible');
+                img9.classList.add('visible');
+                currentPage5Image = 9;
+            }
+        }
+        let page5ImageInterval;
+
+        // 页面6的图片切换功能
+        let currentPage6Image = 11;
+        const img11 = document.getElementById('img11');
+        const img12 = document.getElementById('img12');
+        function switchPage6Images() {
+            if (currentPage6Image === 11) {
+                img11.classList.remove('visible');
+                img12.classList.add('visible');
+                currentPage6Image = 12;
+            } else {
+                img12.classList.remove('visible');
+                img11.classList.add('visible');
+                currentPage6Image = 11;
+            }
+        }
+        let page6ImageInterval;
+
+        // 监听 #page2 是否进入视口
+        const page2 = document.getElementById('page2');
+        const observerPage2 = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    page2ImageInterval = setInterval(switchPage2Images, 3000);
+                    img3.classList.add('visible');
+
+                    // 1 秒后添加 visible 类，触发渐变动画
+                    setTimeout(() => {
+                        navbar2.classList.add('visible');
+                    }, 1000);
+                } else {
+                    clearInterval(page2ImageInterval);
+                    img3.classList.remove('visible');
+                    img4.classList.remove('visible');
+
+                    // 移除 visible 类，恢复初始状态
+                    navbar2.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+        observerPage2.observe(page2);
+
+        // 使用 IntersectionObserver 来监听 #page3 是否进入视口
+        const page3 = document.getElementById('page3');
+        const observerPage3 = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    page3ImageInterval = setInterval(switchPage3Images, 3000);
+                    img5.classList.add('visible');
+                    setTimeout(() => {
+                        navbar3.classList.add('visible');
+                    }, 1000);
+                } else {
+                    clearInterval(page3ImageInterval);
+                    img5.classList.remove('visible');
+                    img6.classList.remove('visible');
+                    navbar3.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+        observerPage3.observe(page3);
+
+        // 使用 IntersectionObserver 来监听 #page4 是否进入视口
+        const page4 = document.getElementById('page4');
+        const arrowIcon = document.querySelector('.arrow-down i');
+        const observerPage4 = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    page4ImageInterval = setInterval(switchPage4Images, 3000);
+                    img7.classList.add('visible');
+                    arrowIcon.classList.remove('fa-chevron-down');
+                    arrowIcon.classList.add('fa-chevron-up');
+                    setTimeout(() => {
+                        navbar4.classList.add('visible');
+                    }, 1000);
+                } else {
+                    clearInterval(page4ImageInterval);
+                    img7.classList.remove('visible');
+                    img8.classList.remove('visible');
+                    navbar4.classList.remove('visible');
+                    arrowIcon.classList.remove('fa-chevron-up');
+                    arrowIcon.classList.add('fa-chevron-down');
+                }
+            });
+        }, { threshold: 0.5 });
+        observerPage4.observe(page4);
+
+        // 监听 #page5 是否进入视口
+        const page5 = document.getElementById('page5');
+        const observerPage5 = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    page5ImageInterval = setInterval(switchPage5Images, 3000);
+                    img9.classList.add('visible');
+                    // 1 秒后添加 visible 类，触发渐变动画
+                    setTimeout(() => {
+                        navbar5.classList.add('visible');
+                    }, 1000);
+                } else {
+                    clearInterval(page5ImageInterval);
+                    img9.classList.remove('visible');
+                    img10.classList.remove('visible');
+                    // 移除 visible 类，恢复初始状态
+                    navbar5.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+        observerPage5.observe(page5);
+
+        // 监听 #page6 是否进入视口
+        const page6 = document.getElementById('page6');
+        const observerPage6 = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    page6ImageInterval = setInterval(switchPage6Images, 3000);
+                    img11.classList.add('visible');
+                    // 1 秒后添加 visible 类，触发渐变动画
+                    setTimeout(() => {
+                        navbar6.classList.add('visible');
+                    }, 1000);
+                } else {
+                    clearInterval(page6ImageInterval);
+                    img11.classList.remove('visible');
+                    img12.classList.remove('visible');
+                    // 移除 visible 类，恢复初始状态
+                    navbar6.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+        observerPage6.observe(page6);
+
+        // 监听页面滚动
+        let isScrolling = false;
+
+        document.querySelector('.scroll-container').addEventListener('wheel', (e) => {
+            if (!isScrolling) {
+                isScrolling = true;
+                let scrollDirection = e.deltaY > 0 ? 'down' : 'up';
+                const container = document.querySelector('.scroll-container');
+                
+                if (scrollDirection === 'down') {
+                    container.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ top: -window.innerHeight, behavior: 'smooth' });
+                }
+
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 800); // 防止快速连续滚动
+            }
+        });
+    </script>
+</body>
+</html>
